@@ -1,0 +1,43 @@
+<% if logged_in? %>
+  <h1>タスク一覧</h1>
+  <% if @tasks.any? %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>タイトル</th>
+          <th>タスク</th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% @tasks.each do |task| %>
+          <tr>
+            <td><%= link_to task.id, task %></td>
+            <td><%= task.status %></td>
+            <td><%= task.content %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div>
+      <%= paginate @tasks %>
+    </div>
+    <div>
+    <%= link_to '新規メッセージの投稿', new_task_path, class: 'btn btn-primary' %>
+    </div>
+    <div class= "col-sm-offset-8 col-sm-5">
+    <%= link_to 'ユーザ情報の編集はこちら', edit_user_path(@user), class: 'btn btn-warning' %>
+    </div>
+  <% end %>
+
+<% else %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h3>タスク管理をするにはユーザ登録をして下さい</h3>
+      <%= link_to 'ユーザ登録はこちら', signup_path, class: 'btn btn-lg btn-primary' %>
+    </div>
+  </div>
+<% end %>
+  
+
